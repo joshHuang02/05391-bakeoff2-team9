@@ -13,6 +13,9 @@ float lettersExpectedTotal = 0; //a running total of the number of letters expec
 float errorsTotal = 0; //a running total of the number of errors (when hitting next)
 String currentPhrase = ""; //the current target phrase
 String currentTyped = ""; //what the user has typed so far
+String[] values;
+int lastClick;
+int counter;
 final int DPIofYourDeviceScreen = 200; //you will need to look up the DPI or PPI of your device to make sure you get the right scale!!
 //http://en.wikipedia.org/wiki/List_of_displays_by_pixel_density
 final float sizeOfInputArea = DPIofYourDeviceScreen*1; //aka, 1.0 inches square!
@@ -26,6 +29,7 @@ void setup()
 {
   watch = loadImage("watchhand3smaller.png");
   phrases = loadStrings("phrases2.txt"); //load the phrase set into memory
+  setValues();
   Collections.shuffle(Arrays.asList(phrases), new Random()); //randomize the order of the phrases with no seed
   //Collections.shuffle(Arrays.asList(phrases), new Random(100)); //randomize the order of the phrases with seed 100; same order every time, useful for testing
  
@@ -33,6 +37,21 @@ void setup()
   size(800, 800); //Sets the size of the app. You should modify this to your device's native size. Many phones today are 1080 wide by 1920 tall.
   textFont(createFont("Arial", 24)); //set the font to arial 24. Creating fonts is expensive, so make difference sizes once in setup, not draw
   noStroke(); //my code doesn't use any strokes
+}
+
+void setValues() {
+  lastClick = -1;
+  counter = -1;
+  values = new String[9];
+  values[0] = "abc";
+  values[1] = "def";
+  values[2] = "ghi";
+  values[3] = "jkl";
+  values[4] = "mno";
+  values[5] = "pqrs";
+  values[6] = "tuv";
+  values[7] = "wxyz";
+  values[8] = ".`_";
 }
 
 //You can modify anything in here. This is just a basic implementation.
@@ -80,13 +99,37 @@ void draw()
     text("NEXT > ", 650, 650); //draw next label
 
     //my draw code
-    fill(255, 0, 0); //red button
-    rect(width/2-sizeOfInputArea/2, height/2-sizeOfInputArea/2+sizeOfInputArea/2, sizeOfInputArea/2, sizeOfInputArea/2); //draw left red button
-    fill(0, 255, 0); //green button
-    rect(width/2-sizeOfInputArea/2+sizeOfInputArea/2, height/2-sizeOfInputArea/2+sizeOfInputArea/2, sizeOfInputArea/2, sizeOfInputArea/2); //draw right green button
+    //fill(255, 0, 0); //red button
+    //rect(width/2-sizeOfInputArea/2, height/2-sizeOfInputArea/2+sizeOfInputArea/2, sizeOfInputArea/2, sizeOfInputArea/2); //draw left red button
+    //fill(0, 255, 0); //green button
+    //rect(width/2-sizeOfInputArea/2+sizeOfInputArea/2, height/2-sizeOfInputArea/2+sizeOfInputArea/2, sizeOfInputArea/2, sizeOfInputArea/2); //draw right green button
     textAlign(CENTER);
     fill(200);
-    text("" + currentLetter, width/2, height/2-sizeOfInputArea/4); //draw current letter
+    text("" + currentLetter, width/2, height/2-sizeOfInputArea/2.5); //draw current letter
+
+    // Draw numpad
+    fill(255, 0, 0); //red button
+    rect(width/3-sizeOfInputArea/3+(2*sizeOfInputArea)/4, height/2-sizeOfInputArea+sizeOfInputArea-sizeOfInputArea/2 +sizeOfInputArea/5, sizeOfInputArea/3, sizeOfInputArea/4); //draw left red button
+    fill(0, 255, 0); //red button
+    rect(width/3-sizeOfInputArea/4+(3*sizeOfInputArea)/4, height/2-sizeOfInputArea+sizeOfInputArea-sizeOfInputArea/2 +sizeOfInputArea/5, sizeOfInputArea/3, sizeOfInputArea/4); //draw left red button
+    fill(0, 0, 255); //red button
+    rect(width/3-sizeOfInputArea/4+(4.35*sizeOfInputArea)/4, height/2-sizeOfInputArea+sizeOfInputArea-sizeOfInputArea/2 +sizeOfInputArea/5, sizeOfInputArea/3, sizeOfInputArea/4); //draw left red button
+    // Draw numpad
+
+    fill(0, 0, 255); //red button
+    rect(width/3-sizeOfInputArea/3+(2*sizeOfInputArea)/4, sizeOfInputArea/4+height/2-sizeOfInputArea+sizeOfInputArea-sizeOfInputArea/2 +sizeOfInputArea/5, sizeOfInputArea/3, sizeOfInputArea/4); //draw left red button
+    fill(255, 0, 0); //red button
+    rect(width/3-sizeOfInputArea/4+(3*sizeOfInputArea)/4, sizeOfInputArea/4+height/2-sizeOfInputArea+sizeOfInputArea-sizeOfInputArea/2 +sizeOfInputArea/5, sizeOfInputArea/3, sizeOfInputArea/4); //draw left red button
+    fill(0, 255, 0); //red button
+    rect(width/3-sizeOfInputArea/4+(4.35*sizeOfInputArea)/4, sizeOfInputArea/4+height/2-sizeOfInputArea+sizeOfInputArea-sizeOfInputArea/2 +sizeOfInputArea/5, sizeOfInputArea/3, sizeOfInputArea/4); //draw left red button
+
+    fill(255, 0, 0); //red button
+    rect(width/3-sizeOfInputArea/3+(2*sizeOfInputArea)/4, 2*sizeOfInputArea/4+height/2-sizeOfInputArea+sizeOfInputArea-sizeOfInputArea/2 +sizeOfInputArea/5, sizeOfInputArea/3, sizeOfInputArea/4); //draw left red button
+    fill(0, 255, 0); //red button
+    rect(width/3-sizeOfInputArea/4+(3*sizeOfInputArea)/4, 2*sizeOfInputArea/4+height/2-sizeOfInputArea+sizeOfInputArea-sizeOfInputArea/2 +sizeOfInputArea/5, sizeOfInputArea/3, sizeOfInputArea/4); //draw left red button
+    fill(0, 0, 255); //red button
+    rect(width/3-sizeOfInputArea/4+(4.35*sizeOfInputArea)/4, 2*sizeOfInputArea/4+height/2-sizeOfInputArea+sizeOfInputArea-sizeOfInputArea/2 +sizeOfInputArea/5, sizeOfInputArea/3, sizeOfInputArea/4); //draw left red button
+
   }
 }
 
@@ -99,21 +142,103 @@ boolean didMouseClick(float x, float y, float w, float h) //simple function to d
 //my terrible implementation you can entirely replace
 void mousePressed()
 {
-  if (didMouseClick(width/2-sizeOfInputArea/2, height/2-sizeOfInputArea/2+sizeOfInputArea/2, sizeOfInputArea/2, sizeOfInputArea/2)) //check if click in left button
-  {
-    currentLetter --;
-    if (currentLetter<'_') //wrap around to z
-      currentLetter = 'z';
+  if (didMouseClick(width/3-sizeOfInputArea/3+(2*sizeOfInputArea)/4, height/2-sizeOfInputArea+sizeOfInputArea-sizeOfInputArea/2 +sizeOfInputArea/5, sizeOfInputArea/3, sizeOfInputArea/4)) {
+    if (lastClick == -1 || lastClick != 0) {
+      counter = 0;
+      lastClick = 0;
+    } else {
+      counter = counter+1;
+    }
+    currentLetter = values[lastClick].charAt(counter%values[lastClick].length());
+  }
+  else if (didMouseClick(width/3-sizeOfInputArea/4+(3*sizeOfInputArea)/4, height/2-sizeOfInputArea+sizeOfInputArea-sizeOfInputArea/2 +sizeOfInputArea/5, sizeOfInputArea/3, sizeOfInputArea/4)) {
+    if (lastClick == -1 || lastClick != 1) {
+      counter = 0;
+      lastClick = 1;
+    } else {
+      counter = counter+1;
+    }
+    currentLetter = values[lastClick].charAt(counter%values[lastClick].length());
+  }
+  if (didMouseClick(width/3-sizeOfInputArea/4+(4.35*sizeOfInputArea)/4, height/2-sizeOfInputArea+sizeOfInputArea-sizeOfInputArea/2 +sizeOfInputArea/5, sizeOfInputArea/3, sizeOfInputArea/4)) {
+    if (lastClick == -1 || lastClick != 2) {
+      counter = 0;
+      lastClick = 2;
+    } else {
+      counter = counter+1;
+    }
+    currentLetter = values[lastClick].charAt(counter%values[lastClick].length());
+  }
+  else if (didMouseClick(width/3-sizeOfInputArea/3+(2*sizeOfInputArea)/4, sizeOfInputArea/4+height/2-sizeOfInputArea+sizeOfInputArea-sizeOfInputArea/2 +sizeOfInputArea/5, sizeOfInputArea/3, sizeOfInputArea/4)) {
+    if (lastClick == -1 || lastClick != 3) {
+      counter = 0;
+      lastClick = 3;
+    } else {
+      counter = counter+1;
+    }
+    currentLetter = values[lastClick].charAt(counter%values[lastClick].length());
+  }
+  if (didMouseClick(width/3-sizeOfInputArea/4+(3*sizeOfInputArea)/4, sizeOfInputArea/4+height/2-sizeOfInputArea+sizeOfInputArea-sizeOfInputArea/2 +sizeOfInputArea/5, sizeOfInputArea/3, sizeOfInputArea/4)) {
+    if (lastClick == -1 || lastClick != 4) {
+      counter = 0;
+      lastClick = 4;
+    } else {
+      counter = counter+1;
+    }
+    currentLetter = values[lastClick].charAt(counter%values[lastClick].length());
+  }
+  else if (didMouseClick(width/3-sizeOfInputArea/4+(4.35*sizeOfInputArea)/4, sizeOfInputArea/4+height/2-sizeOfInputArea+sizeOfInputArea-sizeOfInputArea/2 +sizeOfInputArea/5, sizeOfInputArea/3, sizeOfInputArea/4)) {
+    if (lastClick == -1 || lastClick != 5) {
+      counter = 0;
+      lastClick = 5;
+    } else {
+      counter = counter+1;
+    }
+    currentLetter = values[lastClick].charAt(counter%values[lastClick].length());
+  }
+  if (didMouseClick(width/3-sizeOfInputArea/3+(2*sizeOfInputArea)/4, 2*sizeOfInputArea/4+height/2-sizeOfInputArea+sizeOfInputArea-sizeOfInputArea/2 +sizeOfInputArea/5, sizeOfInputArea/3, sizeOfInputArea/4)) {
+    if (lastClick == -1 || lastClick != 6) {
+      counter = 0;
+      lastClick = 6;
+    } else {
+      counter = counter+1;
+    }
+    currentLetter = values[lastClick].charAt(counter%values[lastClick].length());
+  }
+  else if (didMouseClick(width/3-sizeOfInputArea/4+(3*sizeOfInputArea)/4, 2*sizeOfInputArea/4+height/2-sizeOfInputArea+sizeOfInputArea-sizeOfInputArea/2 +sizeOfInputArea/5, sizeOfInputArea/3, sizeOfInputArea/4)) {
+    if (lastClick == -1 || lastClick != 7) {
+      counter = 0;
+      lastClick = 7;
+    } else {
+      counter = counter+1;
+    }
+    currentLetter = values[lastClick].charAt(counter%values[lastClick].length());
+  }
+  else if (didMouseClick(width/3-sizeOfInputArea/4+(4.35*sizeOfInputArea)/4, 2*sizeOfInputArea/4+height/2-sizeOfInputArea+sizeOfInputArea-sizeOfInputArea/2 +sizeOfInputArea/5, sizeOfInputArea/3, sizeOfInputArea/4)) {
+    if (lastClick == -1 || lastClick != 8) {
+      counter = 0;
+      lastClick = 8;
+    } else {
+      counter = counter+1;
+    }
+    currentLetter = values[lastClick].charAt(counter%values[lastClick].length());
   }
 
-  if (didMouseClick(width/2-sizeOfInputArea/2+sizeOfInputArea/2, height/2-sizeOfInputArea/2+sizeOfInputArea/2, sizeOfInputArea/2, sizeOfInputArea/2)) //check if click in right button
-  {
-    currentLetter ++;
-    if (currentLetter>'z') //wrap back to space (aka underscore)
-      currentLetter = '_';
-  }
+  // if (didMouseClick(width/2-sizeOfInputArea/2, height/2-sizeOfInputArea/2+sizeOfInputArea/2, sizeOfInputArea/2, sizeOfInputArea/2)) //check if click in left button
+  // {
+  //   currentLetter --;
+  //   if (currentLetter<'_') //wrap around to z
+  //     currentLetter = 'z';
+  // }
 
-  if (didMouseClick(width/2-sizeOfInputArea/2, height/2-sizeOfInputArea/2, sizeOfInputArea, sizeOfInputArea/2)) //check if click occured in letter area
+  // if (didMouseClick(width/2-sizeOfInputArea/2+sizeOfInputArea/2, height/2-sizeOfInputArea/2+sizeOfInputArea/2, sizeOfInputArea/2, sizeOfInputArea/2)) //check if click in right button
+  // {
+  //   currentLetter ++;
+  //   if (currentLetter>'z') //wrap back to space (aka underscore)
+  //     currentLetter = '_';
+  // }
+
+  if (didMouseClick(width/3-sizeOfInputArea/3+(2*sizeOfInputArea)/4, -sizeOfInputArea/4+height/2-sizeOfInputArea+sizeOfInputArea-sizeOfInputArea/2 +sizeOfInputArea/5, sizeOfInputArea, sizeOfInputArea/4)) //check if click occured in letter area
   {
     if (currentLetter=='_') //if underscore, consider that a space bar
       currentTyped+=" ";
