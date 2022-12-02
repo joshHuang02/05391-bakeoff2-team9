@@ -65,7 +65,6 @@ void draw()
   if (finishTime!=0)
   {
     fill(128);
-    textAlign(CENTER);
     text("Finished", 280, 150);
     return;
   }
@@ -99,21 +98,27 @@ void draw()
     text("NEXT > ", 650, 650); //draw next label
 
     //my draw code
-    //fill(255, 0, 0); //red button
+    //fill(255, 255, 255); //red button
     //rect(width/2-sizeOfInputArea/2, height/2-sizeOfInputArea/2+sizeOfInputArea/2, sizeOfInputArea/2, sizeOfInputArea/2); //draw left red button
     //fill(0, 255, 0); //green button
     //rect(width/2-sizeOfInputArea/2+sizeOfInputArea/2, height/2-sizeOfInputArea/2+sizeOfInputArea/2, sizeOfInputArea/2, sizeOfInputArea/2); //draw right green button
-    textAlign(CENTER);
-    fill(200);
-    text("" + currentLetter, width/2, height/2-sizeOfInputArea/2.5); //draw current letter
 
     // Draw numpad
-    fill(255, 0, 0); //red button
+    fill(255, 255, 255); //red button
     rect(width/3-sizeOfInputArea/3+(2*sizeOfInputArea)/4, height/2-sizeOfInputArea+sizeOfInputArea-sizeOfInputArea/2 +sizeOfInputArea/5, sizeOfInputArea/3, sizeOfInputArea/4); //draw left red button
+    textAlign(CENTER);
+    fill(0,0,0);
+    text("abc", (width/3-sizeOfInputArea/3+(2*sizeOfInputArea)/4)+(1.5/3*sizeOfInputArea/3), height/2-sizeOfInputArea+sizeOfInputArea-sizeOfInputArea/2 +sizeOfInputArea/5); //draw current letter
     fill(0, 255, 0); //red button
     rect(width/3-sizeOfInputArea/4+(3*sizeOfInputArea)/4, height/2-sizeOfInputArea+sizeOfInputArea-sizeOfInputArea/2 +sizeOfInputArea/5, sizeOfInputArea/3, sizeOfInputArea/4); //draw left red button
+    textAlign(CENTER);
+    fill(0,0,0);
+    text("def", (width/3-sizeOfInputArea/3+(2*sizeOfInputArea)/4)+(1.5*sizeOfInputArea/3), height/2-sizeOfInputArea+sizeOfInputArea-sizeOfInputArea/2 +sizeOfInputArea/5); //draw current letter
     fill(0, 0, 255); //red button
     rect(width/3-sizeOfInputArea/4+(4.35*sizeOfInputArea)/4, height/2-sizeOfInputArea+sizeOfInputArea-sizeOfInputArea/2 +sizeOfInputArea/5, sizeOfInputArea/3, sizeOfInputArea/4); //draw left red button
+    textAlign(CENTER);
+    fill(0,0,0);
+    text("ghi", (width/3-sizeOfInputArea/3+(2*sizeOfInputArea)/4)+(1.5*sizeOfInputArea/3), height/2-sizeOfInputArea+sizeOfInputArea-sizeOfInputArea/2 +sizeOfInputArea/5); //draw current letter
     // Draw numpad
 
     fill(0, 0, 255); //red button
