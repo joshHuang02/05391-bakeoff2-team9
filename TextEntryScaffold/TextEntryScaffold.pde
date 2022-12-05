@@ -97,14 +97,6 @@ void draw()
     rect(600, 600, 200, 200);
     fill(255);
     text("NEXT > ", 650, 650);
-    
-    // Draw backspace button
-    fill(200, 200, 200);
-    stroke(0, 0, 0);
-    rect(width/3-sizeOfInputArea/3+(1.15*sizeOfInputArea)/1, height/2-sizeOfInputArea+sizeOfInputArea-sizeOfInputArea/2 +0*sizeOfInputArea/1, sizeOfInputArea/3, sizeOfInputArea/6);
-    textAlign(CENTER);
-    fill(0, 0, 0);
-    text("<back", width/3-sizeOfInputArea/3+(1.31*sizeOfInputArea)/1, height/2-sizeOfInputArea+sizeOfInputArea-sizeOfInputArea/2 +1*sizeOfInputArea/7);
 
     // Draw letterpad
     fill(255, 255, 255);
@@ -261,13 +253,6 @@ void mousePressed()
     }
     currentLetter = values[lastClick].charAt(counter%values[lastClick].length());
   }
-  // click on delete
-  else if (didMouseClick(width/3-sizeOfInputArea/3+(1.15*sizeOfInputArea)/1, height/2-sizeOfInputArea+sizeOfInputArea-sizeOfInputArea/2 +0*sizeOfInputArea/1, sizeOfInputArea/3, sizeOfInputArea/6)) {
-    // only backspace when there is something to delete
-    if (currentTyped.length() > 0){
-      currentTyped = currentTyped.substring(0, currentTyped.length()-1);
-    }
-  }
 
   // if (didMouseClick(width/2-sizeOfInputArea/2, height/2-sizeOfInputArea/2+sizeOfInputArea/2, sizeOfInputArea/2, sizeOfInputArea/2)) //check if click in left button
   // {
@@ -283,7 +268,7 @@ void mousePressed()
   //     currentLetter = '_';
   // }
 
-  else if (didMouseClick(width/3-sizeOfInputArea/3+(2*sizeOfInputArea)/4, -sizeOfInputArea/4+height/2-sizeOfInputArea+sizeOfInputArea-sizeOfInputArea/2 +sizeOfInputArea/5, sizeOfInputArea, sizeOfInputArea/4)) //check if click occured in letter area
+  if (didMouseClick(width/3-sizeOfInputArea/3+(2*sizeOfInputArea)/4, -sizeOfInputArea/4+height/2-sizeOfInputArea+sizeOfInputArea-sizeOfInputArea/2 +sizeOfInputArea/5, sizeOfInputArea, sizeOfInputArea/4)) //check if click occured in letter area
   {
     if (currentLetter=='_') //if underscore, consider that a space bar
       currentTyped+=" ";
