@@ -242,7 +242,9 @@ void mousePressed()
     }
     currentLetter = values[lastClick].charAt(counter%values[lastClick].length());
   }
+  // click on space
   else if (didMouseClick(width/3-sizeOfInputArea/4+(4.35*sizeOfInputArea)/4, 2*sizeOfInputArea/4+height/2-sizeOfInputArea+sizeOfInputArea-sizeOfInputArea/2 +sizeOfInputArea/5, sizeOfInputArea/3, sizeOfInputArea/4)) {
+    currentTyped+=" ";
     if (lastClick == -1 || lastClick != 8) {
       counter = 0;
       lastClick = 8;
@@ -272,7 +274,7 @@ void mousePressed()
       currentTyped+=" ";
     else if (currentLetter=='`' & currentTyped.length()>0) //if `, treat that as a delete command
       currentTyped = currentTyped.substring(0, currentTyped.length()-1);
-    else if (currentLetter!='`') //if not any of the above cases, add the current letter to the typed string
+    else if (currentLetter!='`') {}//if not any of the above cases, add the current letter to the typed string
       currentTyped+=currentLetter;
   }
 
