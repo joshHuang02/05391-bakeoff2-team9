@@ -1,0 +1,15 @@
+prefix=/opt/homebrew/Cellar/imagemagick/7.1.0-53
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include/ImageMagick-7
+includearchdir=/opt/homebrew/Cellar/imagemagick/7.1.0-53/include/ImageMagick-7
+libname=MagickCore-7.Q16HDRI
+moduledir=${exec_prefix}/lib/ImageMagick-7.1.0/modules-Q16HDRI
+ 
+Name: MagickCore
+Description: MagickCore - C API for ImageMagick (ABI Q16HDRI)
+URL: https://github.com/ImageMagick
+Version: 7.1.0
+Cflags: -I${includearchdir} -I${includedir} -Xpreprocessor -fopenmp -DMAGICKCORE_HDRI_ENABLE=1 -DMAGICKCORE_QUANTUM_DEPTH=16
+Libs: -L${libdir} -l${libname}
+Libs.private: -L${libdir} -l${libname}  -L/opt/homebrew/Cellar/little-cms2/2.14/lib -llcms2 -L/opt/homebrew/opt/freetype/lib -lfreetype  -L/opt/homebrew/Cellar/glib/2.74.0/lib -L/opt/homebrew/opt/gettext/lib -llqr-1 -lglib-2.0 -lintl  -lxml2  -L/opt/homebrew/opt/freetype/lib -L/opt/homebrew/Cellar/fontconfig/2.14.1/lib -lfontconfig -lfreetype     -lbz2 -lz   -lltdl  -lm    -lpthread   -lm

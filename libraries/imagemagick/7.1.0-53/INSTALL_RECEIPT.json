@@ -1,0 +1,401 @@
+{
+  "homebrew_version": "3.6.13-34-g001bace",
+  "used_options": [
+
+  ],
+  "unused_options": [
+
+  ],
+  "built_as_bottle": true,
+  "poured_from_bottle": true,
+  "loaded_from_api": null,
+  "installed_as_dependency": false,
+  "installed_on_request": true,
+  "changed_files": [
+    "bin/Magick++-config",
+    "bin/MagickCore-config",
+    "bin/MagickWand-config",
+    "etc/ImageMagick-7/type-ghostscript.xml",
+    "include/ImageMagick-7/MagickCore/magick-baseconfig.h",
+    "include/ImageMagick-7/MagickCore/version.h",
+    "lib/ImageMagick/config-Q16HDRI/configure.xml",
+    "lib/ImageMagick/modules-Q16HDRI/coders/aai.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/art.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/ashlar.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/avs.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/bayer.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/bgr.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/bmp.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/braille.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/cals.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/caption.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/cin.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/cip.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/clip.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/cmyk.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/cube.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/cut.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/dcm.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/dds.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/debug.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/dib.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/dng.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/dot.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/dpx.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/ept.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/exr.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/farbfeld.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/fax.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/fits.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/fl32.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/ftxt.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/gif.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/gradient.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/gray.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/hald.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/hdr.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/heic.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/histogram.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/hrz.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/html.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/icon.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/info.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/inline.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/ipl.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/jnx.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/jp2.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/jpeg.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/json.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/jxl.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/kernel.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/label.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/mac.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/magick.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/map.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/mask.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/mat.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/matte.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/meta.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/miff.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/mono.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/mpc.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/mpr.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/msl.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/mtv.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/mvg.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/null.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/ora.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/otb.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/palm.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/pango.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/pattern.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/pcd.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/pcl.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/pcx.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/pdb.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/pdf.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/pes.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/pgx.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/pict.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/pix.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/plasma.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/png.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/pnm.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/ps.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/ps2.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/ps3.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/psd.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/pwp.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/qoi.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/raw.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/rgb.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/rgf.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/rla.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/rle.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/scr.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/sct.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/sfw.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/sgi.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/sixel.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/stegano.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/strimg.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/sun.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/svg.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/tga.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/thumbnail.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/tiff.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/tile.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/tim.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/tim2.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/ttf.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/txt.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/uil.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/url.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/uyvy.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/vicar.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/vid.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/video.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/viff.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/vips.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/wbmp.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/webp.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/wpg.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/xbm.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/xc.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/xcf.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/xpm.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/xps.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/yaml.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/ycbcr.la",
+    "lib/ImageMagick/modules-Q16HDRI/coders/yuv.la",
+    "lib/ImageMagick/modules-Q16HDRI/filters/analyze.la",
+    "lib/libMagick++-7.Q16HDRI.la",
+    "lib/libMagickCore-7.Q16HDRI.la",
+    "lib/libMagickWand-7.Q16HDRI.la",
+    "lib/pkgconfig/ImageMagick-7.Q16HDRI.pc",
+    "lib/pkgconfig/ImageMagick.pc",
+    "lib/pkgconfig/Magick++-7.Q16HDRI.pc",
+    "lib/pkgconfig/Magick++.pc",
+    "lib/pkgconfig/MagickCore-7.Q16HDRI.pc",
+    "lib/pkgconfig/MagickCore.pc",
+    "lib/pkgconfig/MagickWand-7.Q16HDRI.pc",
+    "lib/pkgconfig/MagickWand.pc",
+    "share/man/man1/ImageMagick.1",
+    "share/man/man1/animate.1",
+    "share/man/man1/compare.1",
+    "share/man/man1/composite.1",
+    "share/man/man1/conjure.1",
+    "share/man/man1/convert.1",
+    "share/man/man1/display.1",
+    "share/man/man1/identify.1",
+    "share/man/man1/import.1",
+    "share/man/man1/magick-script.1",
+    "share/man/man1/magick.1",
+    "share/man/man1/mogrify.1",
+    "share/man/man1/montage.1",
+    "share/man/man1/stream.1"
+  ],
+  "time": 1670347932,
+  "source_modified_time": 1670166484,
+  "compiler": "clang",
+  "aliases": [
+    "imagemagick@7"
+  ],
+  "runtime_dependencies": [
+    {
+      "full_name": "libpng",
+      "version": "1.6.39",
+      "declared_directly": true
+    },
+    {
+      "full_name": "freetype",
+      "version": "2.12.1",
+      "declared_directly": true
+    },
+    {
+      "full_name": "fontconfig",
+      "version": "2.14.1",
+      "declared_directly": false
+    },
+    {
+      "full_name": "jbig2dec",
+      "version": "0.19",
+      "declared_directly": false
+    },
+    {
+      "full_name": "jpeg-turbo",
+      "version": "2.1.4",
+      "declared_directly": true
+    },
+    {
+      "full_name": "libidn",
+      "version": "1.41",
+      "declared_directly": false
+    },
+    {
+      "full_name": "lz4",
+      "version": "1.9.4",
+      "declared_directly": false
+    },
+    {
+      "full_name": "xz",
+      "version": "5.2.9",
+      "declared_directly": true
+    },
+    {
+      "full_name": "zstd",
+      "version": "1.5.2",
+      "declared_directly": false
+    },
+    {
+      "full_name": "libtiff",
+      "version": "4.4.0",
+      "declared_directly": true
+    },
+    {
+      "full_name": "little-cms2",
+      "version": "2.14",
+      "declared_directly": true
+    },
+    {
+      "full_name": "openjpeg",
+      "version": "2.5.0",
+      "declared_directly": true
+    },
+    {
+      "full_name": "ghostscript",
+      "version": "10.0.0",
+      "declared_directly": true
+    },
+    {
+      "full_name": "brotli",
+      "version": "1.0.9",
+      "declared_directly": false
+    },
+    {
+      "full_name": "giflib",
+      "version": "5.2.1",
+      "declared_directly": false
+    },
+    {
+      "full_name": "highway",
+      "version": "1.0.2",
+      "declared_directly": false
+    },
+    {
+      "full_name": "imath",
+      "version": "3.1.6",
+      "declared_directly": false
+    },
+    {
+      "full_name": "openexr",
+      "version": "3.1.5",
+      "declared_directly": true
+    },
+    {
+      "full_name": "webp",
+      "version": "1.2.4",
+      "declared_directly": true
+    },
+    {
+      "full_name": "jpeg-xl",
+      "version": "0.7.0",
+      "declared_directly": false
+    },
+    {
+      "full_name": "libvmaf",
+      "version": "2.3.1",
+      "declared_directly": false
+    },
+    {
+      "full_name": "aom",
+      "version": "3.5.0",
+      "declared_directly": false
+    },
+    {
+      "full_name": "libde265",
+      "version": "1.0.9",
+      "declared_directly": false
+    },
+    {
+      "full_name": "gettext",
+      "version": "0.21.1",
+      "declared_directly": false
+    },
+    {
+      "full_name": "pcre2",
+      "version": "10.40",
+      "declared_directly": false
+    },
+    {
+      "full_name": "glib",
+      "version": "2.74.3",
+      "declared_directly": false
+    },
+    {
+      "full_name": "docbook",
+      "version": "5.1",
+      "declared_directly": false
+    },
+    {
+      "full_name": "docbook-xsl",
+      "version": "1.79.2",
+      "declared_directly": false
+    },
+    {
+      "full_name": "gnu-getopt",
+      "version": "2.38.1",
+      "declared_directly": false
+    },
+    {
+      "full_name": "xmlto",
+      "version": "0.0.28",
+      "declared_directly": false
+    },
+    {
+      "full_name": "shared-mime-info",
+      "version": "2.2",
+      "declared_directly": false
+    },
+    {
+      "full_name": "x265",
+      "version": "3.5",
+      "declared_directly": false
+    },
+    {
+      "full_name": "libheif",
+      "version": "1.14.0",
+      "declared_directly": true
+    },
+    {
+      "full_name": "liblqr",
+      "version": "0.4.2",
+      "declared_directly": true
+    },
+    {
+      "full_name": "jasper",
+      "version": "4.0.0",
+      "declared_directly": false
+    },
+    {
+      "full_name": "libomp",
+      "version": "15.0.6",
+      "declared_directly": true
+    },
+    {
+      "full_name": "libraw",
+      "version": "0.20.2",
+      "declared_directly": true
+    },
+    {
+      "full_name": "m4",
+      "version": "1.4.19",
+      "declared_directly": false
+    },
+    {
+      "full_name": "libtool",
+      "version": "2.4.7",
+      "declared_directly": true
+    }
+  ],
+  "source": {
+    "spec": "stable",
+    "versions": {
+      "stable": "7.1.0-53",
+      "head": null,
+      "version_scheme": 0
+    },
+    "path": "/opt/homebrew/Library/Taps/homebrew/homebrew-core/Formula/imagemagick.rb",
+    "tap_git_head": "6b38d8066a075ad554ba3f08f7633db0a334ca40",
+    "tap": "homebrew/core"
+  },
+  "arch": "arm64",
+  "built_on": {
+    "os": "Macintosh",
+    "os_version": "macOS 13",
+    "cpu_family": "dunno",
+    "xcode": "14.1",
+    "clt": "14.1.0.0.1.1665256668",
+    "preferred_perl": "5.30"
+  }
+}
