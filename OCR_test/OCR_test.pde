@@ -1,39 +1,28 @@
-import net.sourceforge.tess4j.*;
-import java.awt.image.BufferedImage;
- 
-Tesseract ocr;
-BufferedImage img;
-PImage pimg;
-String res, show;
-int idx;
- 
-void setup() {
-  size(400, 600);
-  background(0);
-  ocr = new Tesseract();
-  ocr.setDatapath(dataPath(""));
-  pimg = loadImage("testing.png");
-  img = (BufferedImage) pimg.getNative();
-  show = "";
-  idx = 0;
-  try {
-    res = ocr.doOCR(img);
-    //   println(res);
-  } 
-  catch (TesseractException e) {
-    println(e.getMessage());
-  }
-  frameRate(25);
-}
- 
-void draw() {
-  background(0);
-  image(pimg, 0, 0);
-  if (idx < res.length()) {
-    show += res.charAt(idx);
-    idx++;
-  } else {
-    noLoop();
-  }
-  text(show, 20, pimg.height+30);
-}
+// https://discourse.processing.org/t/i-have-a-question-regarding-ocr/39466
+// https://www.geeksforgeeks.org/tesseract-ocr-with-java-with-examples/
+
+import java.io.File;
+  
+import net.sourceforge.tess4j.Tesseract;
+import net.sourceforge.tess4j.TesseractException;
+  
+public class Test {
+    public static void main(String[] args)
+    {
+        Tesseract tesseract = new Tesseract();
+        try {
+  
+            tesseract.setDatapath("D:/Tess4J/tessdata");
+  
+            // the path of your tess data folder
+            // inside the extracted file
+            String text
+                = tesseract.doOCR(new File("test.jpg"));
+  
+            // path of your image file
+            System.out.print(text);
+        }
+        catch (TesseractException e) {
+            e.printStackTrace();
+        }
+    }
