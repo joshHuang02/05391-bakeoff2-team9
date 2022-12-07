@@ -29,9 +29,14 @@ int counter;
 final int defaultDPI = 200;
 float leftEdge;
 float topEdge;
+PVector currClick = new PVector(0,0);
+PVector prevClick = new PVector(0,0);
 PVector btnSize = new PVector(sizeOfInputArea/3, sizeOfInputArea/4);
 int btnRadius = 5;
-
+String [][][] letters = {{{""},{""},{"delete"}},
+                         {{"_"}, {"a","b","c"}, {"d","e","f"}},
+                         {{"g","h","i"}, {"j","k","l"}, {"m","n","o"}, },
+                         {{"p","q","r","s"}, {"t","u","v"}, {"w","x","y","z"}}};
 
 
 //You can modify anything in here. This is just a basic implementation.
@@ -51,8 +56,6 @@ void setup()
   // set custom variables
   leftEdge = width/2-sizeOfInputArea/2;
   topEdge = height/2-sizeOfInputArea/2;
-  println(btnSize.x);
-  println(btnSize.y);
   
 }
 
@@ -116,111 +119,63 @@ void draw()
     fill(255);
     text("NEXT > ", 650, 650);
     
-    
-    
-    for(int col = 0; col < 3; col ++) { // 3 columns
-      for(int row = 0; row < 4; row ++) { // 4 rows including text area
+    for(int row = 0; row < 4; row ++) { // 3 columns
+      for(int col = 0; col < 3; col ++) { // 4 rows including text area
         // define position of this grid
         PVector pos = new PVector(leftEdge + col*btnSize.x, topEdge + row*btnSize.y);
+        // detect if mouse is over which grid
+        boolean mouseOver = didMouseClick(pos.x, pos.y, btnSize.x, btnSize.y);
+        
         if (row == 0) { //first row, display and backspace
+          if (col < 2) { // first 2 columns only text
+            if (mouseOver) currClick.set(row, col); // set current mouse click on which button
+            if (col == 0) { // only draw currentLetter once
+              fill (255);
+              textAlign(CENTER);
+              text("" + currentLetter, leftEdge + btnSize.x, topEdge + btnSize.y - 10);
+            }
+          }
           if (col == 2) { // 3rd column
             // draw backsapce button
-            fill(200, 200, 200);
+            if (mouseOver) {
+              currClick.set(row, col); // set current mouse click on which button
+              fill(200, 50, 50);
+            } else {
+              fill(255, 50, 50);
+            }
             stroke(7);
-            rect(pos.x, pos.y, btnSize.x, btnSize.y - 5, btnRadius); 
+            rect(pos.x, pos.y, btnSize.x, btnSize.y, btnRadius); 
             
+            // backspace text
             fill(0,0,0);
             textAlign(CENTER);
             textSize(15);
-            text("delete", pos.x + btnSize.x/2, pos.y + btnSize.y - 15);
+            text("delete", pos.x + btnSize.x/2, pos.y + btnSize.y - 10);
             
           }
         } else { // rows with letter pad
-          
           // draw letter pad
-          fill(255, 255, 255);
+          if (mouseOver) {
+            currClick.set(row, col); // set current mouse click on which button
+            fill(200, 200, 200);
+          } else {
+            fill(255, 255, 255);
+          }
           stroke(10);
           rect(pos.x, pos.y, btnSize.x, btnSize.y, btnRadius); 
           
           // draw letters
           fill(0,0,0);
           textAlign(CENTER);
-          textSize(20);
-          int value = col + row - 1;
-          text(values[value], pos.x + btnSize.x/2, pos.y + btnSize.y - 10);
+          textSize(18);
+          text(String.join("", letters[row][col]) , pos.x + btnSize.x/2, pos.y + btnSize.y - 10);
         }
       }
     }
-    /*
-    // Draw backspace button
-    fill(200, 200, 200);
-    stroke(0, 0, 0);
-    rect(width/3-sizeOfInputArea/3+(1.15*sizeOfInputArea)/1, height/2-sizeOfInputArea+sizeOfInputArea-sizeOfInputArea/2 +0*sizeOfInputArea/1, sizeOfInputArea/3, sizeOfInputArea/6);
-    textAlign(CENTER);
-    fill(0, 0, 0);
-    text("<back", width/3-sizeOfInputArea/3+(1.31*sizeOfInputArea)/1, height/2-sizeOfInputArea+sizeOfInputArea-sizeOfInputArea/2 +1*sizeOfInputArea/7);
-
-    // Draw letterpad
-    fill(255, 255, 255);
-    stroke(0, 0, 0);
-    rect(width/3-sizeOfInputArea/3+(2*sizeOfInputArea)/4, height/2-sizeOfInputArea+sizeOfInputArea-sizeOfInputArea/2 +sizeOfInputArea/5, sizeOfInputArea/3, sizeOfInputArea/4);
-    textAlign(CENTER);
-    fill(0, 0, 0);
-    text("abc", (width/3-sizeOfInputArea/3+(2*sizeOfInputArea)/4)+(1.5/3*sizeOfInputArea/3), height/2-sizeOfInputArea+sizeOfInputArea-sizeOfInputArea/2+(1.8*sizeOfInputArea/5));
     
-    fill(255, 255, 255);
-    rect(width/3-sizeOfInputArea/4+(3*sizeOfInputArea)/4, height/2-sizeOfInputArea+sizeOfInputArea-sizeOfInputArea/2 +sizeOfInputArea/5, sizeOfInputArea/3, sizeOfInputArea/4); 
-    textAlign(CENTER);
-    fill(0, 0, 0);
-    text("def", (width/3-sizeOfInputArea/3+(2*sizeOfInputArea)/4)+(1.5*sizeOfInputArea/3), height/2-sizeOfInputArea+sizeOfInputArea-sizeOfInputArea/2+(1.8*sizeOfInputArea/5));
-    
-    fill(255, 255, 255);
-    rect(width/3-sizeOfInputArea/4+(4.35*sizeOfInputArea)/4, height/2-sizeOfInputArea+sizeOfInputArea-sizeOfInputArea/2 +sizeOfInputArea/5, sizeOfInputArea/3, sizeOfInputArea/4);
-    textAlign(CENTER);
-    fill(0, 0, 0);
-    text("ghi", (width/3-sizeOfInputArea/3+(2*sizeOfInputArea)/4)+(2.5*sizeOfInputArea/3), height/2-sizeOfInputArea+sizeOfInputArea-sizeOfInputArea/2+(1.8*sizeOfInputArea/5));
-
-    // second row
-    fill(255, 255, 255);
-    rect(width/3-sizeOfInputArea/3+(2*sizeOfInputArea)/4, sizeOfInputArea/4+height/2-sizeOfInputArea+sizeOfInputArea-sizeOfInputArea/2 +sizeOfInputArea/5, sizeOfInputArea/3, sizeOfInputArea/4); //draw left red button
-    textAlign(CENTER);
-    fill(0, 0, 0);
-    text("jkl", (width/3-sizeOfInputArea/3+(2*sizeOfInputArea)/4)+(1.5/3*sizeOfInputArea/3), height/2-sizeOfInputArea+sizeOfInputArea-sizeOfInputArea/2+(3*sizeOfInputArea/5));
-    
-    fill(255, 255, 255);
-    rect(width/3-sizeOfInputArea/4+(3*sizeOfInputArea)/4, sizeOfInputArea/4+height/2-sizeOfInputArea+sizeOfInputArea-sizeOfInputArea/2 +sizeOfInputArea/5, sizeOfInputArea/3, sizeOfInputArea/4); //draw left red button
-    textAlign(CENTER);
-    fill(0, 0, 0);
-    text("mno", (width/3-sizeOfInputArea/3+(2*sizeOfInputArea)/4)+(1.5*sizeOfInputArea/3), height/2-sizeOfInputArea+sizeOfInputArea-sizeOfInputArea/2+(3*sizeOfInputArea/5));
-    
-    fill(255, 255, 255);
-    rect(width/3-sizeOfInputArea/4+(4.35*sizeOfInputArea)/4, sizeOfInputArea/4+height/2-sizeOfInputArea+sizeOfInputArea-sizeOfInputArea/2 +sizeOfInputArea/5, sizeOfInputArea/3, sizeOfInputArea/4); //draw left red button
-    textAlign(CENTER);
-    fill(0, 0, 0);
-    text("pqrs", (width/3-sizeOfInputArea/3+(2*sizeOfInputArea)/4)+(2.5*sizeOfInputArea/3), height/2-sizeOfInputArea+sizeOfInputArea-sizeOfInputArea/2+(3*sizeOfInputArea/5));
-
-    // third row
-    fill(255, 255, 255);
-    rect(width/3-sizeOfInputArea/3+(2*sizeOfInputArea)/4, 2*sizeOfInputArea/4+height/2-sizeOfInputArea+sizeOfInputArea-sizeOfInputArea/2 +sizeOfInputArea/5, sizeOfInputArea/3, sizeOfInputArea/4); //draw left red button
-    textAlign(CENTER);
-    fill(0, 0, 0);
-    text("tuv", (width/3-sizeOfInputArea/3+(2*sizeOfInputArea)/4)+(1.5/3*sizeOfInputArea/3), height/2-sizeOfInputArea+sizeOfInputArea-sizeOfInputArea/2+(4.3*sizeOfInputArea/5));
-    
-    fill(255, 255, 255);
-    rect(width/3-sizeOfInputArea/4+(3*sizeOfInputArea)/4, 2*sizeOfInputArea/4+height/2-sizeOfInputArea+sizeOfInputArea-sizeOfInputArea/2 +sizeOfInputArea/5, sizeOfInputArea/3, sizeOfInputArea/4); //draw left red button
-    textAlign(CENTER);
-    fill(0, 0, 0);
-    text("wxyz", (width/3-sizeOfInputArea/3+(2*sizeOfInputArea)/4)+(1.5*sizeOfInputArea/3), height/2-sizeOfInputArea+sizeOfInputArea-sizeOfInputArea/2+(4.3*sizeOfInputArea/5));
-    
-    fill(255, 255, 255);
-    rect(width/3-sizeOfInputArea/4+(4.35*sizeOfInputArea)/4, 2*sizeOfInputArea/4+height/2-sizeOfInputArea+sizeOfInputArea-sizeOfInputArea/2 +sizeOfInputArea/5, sizeOfInputArea/3, sizeOfInputArea/4); //draw left red button
-    textAlign(CENTER);
-    fill(0, 0, 0);
-    text("_", (width/3-sizeOfInputArea/3+(2*sizeOfInputArea)/4)+(2.5*sizeOfInputArea/3), height/2-sizeOfInputArea+sizeOfInputArea-sizeOfInputArea/2+(4.3*sizeOfInputArea/5));
-    */
   
-    fill(225);
-    text("" + currentLetter, width/2, height/2-sizeOfInputArea/3); //draw current letter
+  //  fill(225);
+  //  text("" + currentLetter, width/2, height/2-sizeOfInputArea/3); //draw current letter
   }
 }
 
@@ -233,119 +188,23 @@ boolean didMouseClick(float x, float y, float w, float h) //simple function to d
 //my terrible implementation you can entirely replace
 void mousePressed()
 {
-  if (didMouseClick(width/3-sizeOfInputArea/3+(2*sizeOfInputArea)/4, height/2-sizeOfInputArea+sizeOfInputArea-sizeOfInputArea/2 +sizeOfInputArea/5, sizeOfInputArea/3, sizeOfInputArea/4)) {
-    if (lastClick == -1 || lastClick != 0) {
-      counter = 0;
-      lastClick = 0;
-    } else {
-      counter = counter+1;
-    }
-    currentLetter = values[lastClick].charAt(counter%values[lastClick].length());
-  }
-  else if (didMouseClick(width/3-sizeOfInputArea/4+(3*sizeOfInputArea)/4, height/2-sizeOfInputArea+sizeOfInputArea-sizeOfInputArea/2 +sizeOfInputArea/5, sizeOfInputArea/3, sizeOfInputArea/4)) {
-    if (lastClick == -1 || lastClick != 1) {
-      counter = 0;
-      lastClick = 1;
-    } else {
-      counter = counter+1;
-    }
-    currentLetter = values[lastClick].charAt(counter%values[lastClick].length());
-  }
-  if (didMouseClick(width/3-sizeOfInputArea/4+(4.35*sizeOfInputArea)/4, height/2-sizeOfInputArea+sizeOfInputArea-sizeOfInputArea/2 +sizeOfInputArea/5, sizeOfInputArea/3, sizeOfInputArea/4)) {
-    if (lastClick == -1 || lastClick != 2) {
-      counter = 0;
-      lastClick = 2;
-    } else {
-      counter = counter+1;
-    }
-    currentLetter = values[lastClick].charAt(counter%values[lastClick].length());
-  }
-  else if (didMouseClick(width/3-sizeOfInputArea/3+(2*sizeOfInputArea)/4, sizeOfInputArea/4+height/2-sizeOfInputArea+sizeOfInputArea-sizeOfInputArea/2 +sizeOfInputArea/5, sizeOfInputArea/3, sizeOfInputArea/4)) {
-    if (lastClick == -1 || lastClick != 3) {
-      counter = 0;
-      lastClick = 3;
-    } else {
-      counter = counter+1;
-    }
-    currentLetter = values[lastClick].charAt(counter%values[lastClick].length());
-  }
-  if (didMouseClick(width/3-sizeOfInputArea/4+(3*sizeOfInputArea)/4, sizeOfInputArea/4+height/2-sizeOfInputArea+sizeOfInputArea-sizeOfInputArea/2 +sizeOfInputArea/5, sizeOfInputArea/3, sizeOfInputArea/4)) {
-    if (lastClick == -1 || lastClick != 4) {
-      counter = 0;
-      lastClick = 4;
-    } else {
-      counter = counter+1;
-    }
-    currentLetter = values[lastClick].charAt(counter%values[lastClick].length());
-  }
-  else if (didMouseClick(width/3-sizeOfInputArea/4+(4.35*sizeOfInputArea)/4, sizeOfInputArea/4+height/2-sizeOfInputArea+sizeOfInputArea-sizeOfInputArea/2 +sizeOfInputArea/5, sizeOfInputArea/3, sizeOfInputArea/4)) {
-    if (lastClick == -1 || lastClick != 5) {
-      counter = 0;
-      lastClick = 5;
-    } else {
-      counter = counter+1;
-    }
-    currentLetter = values[lastClick].charAt(counter%values[lastClick].length());
-  }
-  if (didMouseClick(width/3-sizeOfInputArea/3+(2*sizeOfInputArea)/4, 2*sizeOfInputArea/4+height/2-sizeOfInputArea+sizeOfInputArea-sizeOfInputArea/2 +sizeOfInputArea/5, sizeOfInputArea/3, sizeOfInputArea/4)) {
-    if (lastClick == -1 || lastClick != 6) {
-      counter = 0;
-      lastClick = 6;
-    } else {
-      counter = counter+1;
-    }
-    currentLetter = values[lastClick].charAt(counter%values[lastClick].length());
-  }
-  else if (didMouseClick(width/3-sizeOfInputArea/4+(3*sizeOfInputArea)/4, 2*sizeOfInputArea/4+height/2-sizeOfInputArea+sizeOfInputArea-sizeOfInputArea/2 +sizeOfInputArea/5, sizeOfInputArea/3, sizeOfInputArea/4)) {
-    if (lastClick == -1 || lastClick != 7) {
-      counter = 0;
-      lastClick = 7;
-    } else {
-      counter = counter+1;
-    }
-    currentLetter = values[lastClick].charAt(counter%values[lastClick].length());
-  }
-  // click on space
-  else if (didMouseClick(width/3-sizeOfInputArea/4+(4.35*sizeOfInputArea)/4, 2*sizeOfInputArea/4+height/2-sizeOfInputArea+sizeOfInputArea-sizeOfInputArea/2 +sizeOfInputArea/5, sizeOfInputArea/3, sizeOfInputArea/4)) {
-    currentTyped+=" ";
-    if (lastClick == -1 || lastClick != 8) {
-      counter = 0;
-      lastClick = 8;
-    } else {
-      counter = counter+1;
-    }
-    currentLetter = values[lastClick].charAt(counter%values[lastClick].length());
-  }
-  // click on delete
-  else if (didMouseClick(width/3-sizeOfInputArea/3+(1.15*sizeOfInputArea)/1, height/2-sizeOfInputArea+sizeOfInputArea-sizeOfInputArea/2 +0*sizeOfInputArea/1, sizeOfInputArea/3, sizeOfInputArea/6)) {
+  println(currClick.x + " " + currClick.y + ":" + prevClick.x + " " + prevClick.y);
+  if (currClick.x == 0 && currClick.y < 2) { // clicks on submit area btns
+    currentTyped+=currentLetter;
+  } else if (currClick.x == 0 && currClick.y == 2) { // clicks on delete button
     // only backspace when there is something to delete
-    if (currentTyped.length() > 0){
-      currentTyped = currentTyped.substring(0, currentTyped.length()-1);
+    if (currentTyped.length() > 0) currentTyped = currentTyped.substring(0, currentTyped.length()-1); 
+  } else if (currClick.x == 1 && currClick.y == 0) { // clicks on space button
+    currentTyped+=" ";
+  } else { //clicks on letter pad
+    if (currClick.equals(prevClick)) {
+      counter ++;
+      if (counter >= letters[(int)currClick.x][(int)currClick.y].length) counter = 0;
+    } else {
+      counter = 0;
     }
-  }
-
-  // if (didMouseClick(width/2-sizeOfInputArea/2, height/2-sizeOfInputArea/2+sizeOfInputArea/2, sizeOfInputArea/2, sizeOfInputArea/2)) //check if click in left button
-  // {
-  //   currentLetter --;
-  //   if (currentLetter<'_') //wrap around to z
-  //     currentLetter = 'z';
-  // }
-
-  // if (didMouseClick(width/2-sizeOfInputArea/2+sizeOfInputArea/2, height/2-sizeOfInputArea/2+sizeOfInputArea/2, sizeOfInputArea/2, sizeOfInputArea/2)) //check if click in right button
-  // {
-  //   currentLetter ++;
-  //   if (currentLetter>'z') //wrap back to space (aka underscore)
-  //     currentLetter = '_';
-  // }
-
-  else if (didMouseClick(width/3-sizeOfInputArea/3+(2*sizeOfInputArea)/4, -sizeOfInputArea/4+height/2-sizeOfInputArea+sizeOfInputArea-sizeOfInputArea/2 +sizeOfInputArea/5, sizeOfInputArea, sizeOfInputArea/4)) //check if click occured in letter area
-  {
-    if (currentLetter=='_') //if underscore, consider that a space bar
-      currentTyped+=" ";
-    else if (currentLetter=='`' & currentTyped.length()>0) //if `, treat that as a delete command
-      currentTyped = currentTyped.substring(0, currentTyped.length()-1);
-    else if (currentLetter!='`') {}//if not any of the above cases, add the current letter to the typed string
-      currentTyped+=currentLetter;
+    currentLetter = letters[(int)currClick.x][(int)currClick.y][counter].charAt(0);
+    prevClick.set(currClick.x, currClick.y);
   }
 
   //You are allowed to have a next button outside the 1" area
