@@ -13,16 +13,26 @@ float lettersExpectedTotal = 0; //a running total of the number of letters expec
 float errorsTotal = 0; //a running total of the number of errors (when hitting next)
 String currentPhrase = ""; //the current target phrase
 String currentTyped = ""; //what the user has typed so far
-String[] values;
-int lastClick;
-int counter;
-final int DPIofYourDeviceScreen = 200; //look up the DPI or PPI of your device to make sure you get the right scale
+
+final int DPIofYourDeviceScreen = 130; //look up the DPI or PPI of your device to make sure you get the right scale
 //http://en.wikipedia.org/wiki/List_of_displays_by_pixel_density
 final float sizeOfInputArea = DPIofYourDeviceScreen*1; //aka, 1.0 inches square!
 PImage watch;
 
 //Variables for my silly implementation. You can delete this:
 char currentLetter = 'a';
+
+// new variables
+String[] values;
+int lastClick;
+int counter;
+final int defaultDPI = 200;
+float leftEdge;
+float topEdge;
+PVector btnSize = new PVector(sizeOfInputArea/3, sizeOfInputArea/4);
+int btnRadius = 5;
+
+
 
 //You can modify anything in here. This is just a basic implementation.
 void setup()
@@ -37,6 +47,13 @@ void setup()
   size(800, 800); //Sets the size of the app. You should modify this to your device's native size. Many phones today are 1080 wide by 1920 tall.
   textFont(createFont("Arial", 24)); //set the font to arial 24. Creating fonts is expensive, so make difference sizes once in setup, not draw
   noStroke(); //my code doesn't use any strokes
+  
+  // set custom variables
+  leftEdge = width/2-sizeOfInputArea/2;
+  topEdge = height/2-sizeOfInputArea/2;
+  println(btnSize.x);
+  println(btnSize.y);
+  
 }
 
 void setValues() {
@@ -61,7 +78,8 @@ void draw()
   drawWatch(); //draw watch background
   fill(100);
   stroke(100);
-  rect(width/2-sizeOfInputArea/2, height/2-sizeOfInputArea/2, sizeOfInputArea, sizeOfInputArea); //input area should be 1" by 1"
+  // dont know what this does before but idk
+  rect(leftEdge, topEdge, sizeOfInputArea, sizeOfInputArea); //input area should be 1" by 1"
 
   if (finishTime!=0)
   {
@@ -98,6 +116,42 @@ void draw()
     fill(255);
     text("NEXT > ", 650, 650);
     
+    
+    
+    for(int col = 0; col < 3; col ++) { // 3 columns
+      for(int row = 0; row < 4; row ++) { // 4 rows including text area
+        // define position of this grid
+        PVector pos = new PVector(leftEdge + col*btnSize.x, topEdge + row*btnSize.y);
+        if (row == 0) { //first row, display and backspace
+          if (col == 2) { // 3rd column
+            // draw backsapce button
+            fill(200, 200, 200);
+            stroke(7);
+            rect(pos.x, pos.y, btnSize.x, btnSize.y - 5, btnRadius); 
+            
+            fill(0,0,0);
+            textAlign(CENTER);
+            textSize(15);
+            text("delete", pos.x + btnSize.x/2, pos.y + btnSize.y - 15);
+            
+          }
+        } else { // rows with letter pad
+          
+          // draw letter pad
+          fill(255, 255, 255);
+          stroke(10);
+          rect(pos.x, pos.y, btnSize.x, btnSize.y, btnRadius); 
+          
+          // draw letters
+          fill(0,0,0);
+          textAlign(CENTER);
+          textSize(20);
+          int value = col + row - 1;
+          text(values[value], pos.x + btnSize.x/2, pos.y + btnSize.y - 10);
+        }
+      }
+    }
+    /*
     // Draw backspace button
     fill(200, 200, 200);
     stroke(0, 0, 0);
@@ -163,6 +217,7 @@ void draw()
     textAlign(CENTER);
     fill(0, 0, 0);
     text("_", (width/3-sizeOfInputArea/3+(2*sizeOfInputArea)/4)+(2.5*sizeOfInputArea/3), height/2-sizeOfInputArea+sizeOfInputArea-sizeOfInputArea/2+(4.3*sizeOfInputArea/5));
+    */
   
     fill(225);
     text("" + currentLetter, width/2, height/2-sizeOfInputArea/3); //draw current letter
