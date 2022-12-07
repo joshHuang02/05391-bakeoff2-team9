@@ -34,10 +34,10 @@ PVector prevClick = new PVector(0,0);
 PVector btnSize = new PVector(sizeOfInputArea/3, sizeOfInputArea/4); // sets the size of each button in grid
 int btnRadius = 5; // cute lil radius to make button round
 // 3D array to store all values on grid
-String [][][] letters = {{{""},{""},{"delete"}},
-                         {{"_"}, {"a","b","c"}, {"d","e","f"}},
-                         {{"g","h","i"}, {"j","k","l"}, {"m","n","o"}, },
-                         {{"p","q","r","s"}, {"t","u","v"}, {"w","x","y","z"}}};
+String [][][] letters = { {{""}             , {""}         , {"delete"}      },
+                          {{"_"}            , {"a","b","c"}, {"d","e","f"}   },
+                          {{"g","h","i"}    , {"j","k","l"}, {"m","n","o"}   },
+                          {{"p","q","r","s"}, {"t","u","v"}, {"w","x","y","z"}} };
 
 
 //You can modify anything in here. This is just a basic implementation.
