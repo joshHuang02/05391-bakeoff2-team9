@@ -23,16 +23,17 @@ PImage watch;
 char currentLetter = 'a';
 
 // new variables
+boolean debug = false;
 String[] values;
-int lastClick;
 int counter;
 final int defaultDPI = 200;
 float leftEdge;
 float topEdge;
 PVector currClick = new PVector(0,0);
 PVector prevClick = new PVector(0,0);
-PVector btnSize = new PVector(sizeOfInputArea/3, sizeOfInputArea/4);
-int btnRadius = 5;
+PVector btnSize = new PVector(sizeOfInputArea/3, sizeOfInputArea/4); // sets the size of each button in grid
+int btnRadius = 5; // cute lil radius to make button round
+// 3D array to store all values on grid
 String [][][] letters = {{{""},{""},{"delete"}},
                          {{"_"}, {"a","b","c"}, {"d","e","f"}},
                          {{"g","h","i"}, {"j","k","l"}, {"m","n","o"}, },
@@ -44,7 +45,6 @@ void setup()
 {
   watch = loadImage("watchhand3smaller.png");
   phrases = loadStrings("phrases2.txt"); //load the phrase set into memory
-  setValues();
   Collections.shuffle(Arrays.asList(phrases), new Random()); //randomize the order of the phrases with no seed
   //Collections.shuffle(Arrays.asList(phrases), new Random(100)); //randomize the order of the phrases with seed 100; same order every time, useful for testing
  
@@ -59,21 +59,6 @@ void setup()
   
 }
 
-void setValues() {
-  lastClick = -1;
-  counter = -1;
-  values = new String[9];
-  values[0] = "abc";
-  values[1] = "def";
-  values[2] = "ghi";
-  values[3] = "jkl";
-  values[4] = "mno";
-  values[5] = "pqrs";
-  values[6] = "tuv";
-  values[7] = "wxyz";
-  values[8] = "_";
-}
-
 //You can modify anything in here. This is just a basic implementation.
 void draw()
 {
@@ -81,7 +66,8 @@ void draw()
   drawWatch(); //draw watch background
   fill(100);
   stroke(100);
-  // dont know what this does before but idk
+  
+  // draw screen area
   rect(leftEdge, topEdge, sizeOfInputArea, sizeOfInputArea); //input area should be 1" by 1"
 
   if (finishTime!=0)
@@ -119,23 +105,28 @@ void draw()
     fill(255);
     text("NEXT > ", 650, 650);
     
+    // draw grid contents of the screen
     for(int row = 0; row < 4; row ++) { // 3 columns
       for(int col = 0; col < 3; col ++) { // 4 rows including text area
-        // define position of this grid
+        // define position of this button
         PVector pos = new PVector(leftEdge + col*btnSize.x, topEdge + row*btnSize.y);
-        // detect if mouse is over which grid
+        // detect if mouse is over current button
         boolean mouseOver = didMouseClick(pos.x, pos.y, btnSize.x, btnSize.y);
         
         if (row == 0) { //first row, display and backspace
-          if (col < 2) { // first 2 columns only text
-            if (mouseOver) currClick.set(row, col); // set current mouse click on which button
-            if (col == 0) { // only draw currentLetter once
+          // first 2 columns show current text
+          if (col < 2) {
+            // set current click over current button
+            if (mouseOver) currClick.set(row, col);
+            if (col == 0) { // only draw currentLetter once for the 2 button space it has
               fill (255);
               textAlign(CENTER);
               text("" + currentLetter, leftEdge + btnSize.x, topEdge + btnSize.y - 10);
             }
           }
-          if (col == 2) { // 3rd column
+          
+          // 3rd column is delete button
+          if (col == 2) {
             // draw backsapce button
             if (mouseOver) {
               currClick.set(row, col); // set current mouse click on which button
@@ -151,10 +142,10 @@ void draw()
             textAlign(CENTER);
             textSize(15);
             text("delete", pos.x + btnSize.x/2, pos.y + btnSize.y - 10);
-            
           }
-        } else { // rows with letter pad
-          // draw letter pad
+        // draws grid rows with letter pad
+        } else {
+          // draw letter pad buttons
           if (mouseOver) {
             currClick.set(row, col); // set current mouse click on which button
             fill(200, 200, 200);
@@ -172,10 +163,6 @@ void draw()
         }
       }
     }
-    
-  
-  //  fill(225);
-  //  text("" + currentLetter, width/2, height/2-sizeOfInputArea/3); //draw current letter
   }
 }
 
@@ -185,24 +172,34 @@ boolean didMouseClick(float x, float y, float w, float h) //simple function to d
   return (mouseX > x && mouseX<x+w && mouseY>y && mouseY<y+h); //check to see if it is in button bounds
 }
 
-//my terrible implementation you can entirely replace
 void mousePressed()
 {
-  println(currClick.x + " " + currClick.y + ":" + prevClick.x + " " + prevClick.y);
-  if (currClick.x == 0 && currClick.y < 2) { // clicks on submit area btns
+  if (debug) println(currClick.x + " " + currClick.y + ":" + prevClick.x + " " + prevClick.y);
+  
+  // clicks on current text area
+  if (currClick.x == 0 && currClick.y < 2) { 
     currentTyped+=currentLetter;
-  } else if (currClick.x == 0 && currClick.y == 2) { // clicks on delete button
+  
+  // clicks on delete button
+  } else if (currClick.x == 0 && currClick.y == 2) {
     // only backspace when there is something to delete
     if (currentTyped.length() > 0) currentTyped = currentTyped.substring(0, currentTyped.length()-1); 
-  } else if (currClick.x == 1 && currClick.y == 0) { // clicks on space button
+  
+  // clicks on space button
+  } else if (currClick.x == 1 && currClick.y == 0) {
     currentTyped+=" ";
-  } else { //clicks on letter pad
+    
+  //clicks on letter pad buttons
+  } else {
+    // if click same button as last time, increase counter
     if (currClick.equals(prevClick)) {
       counter ++;
       if (counter >= letters[(int)currClick.x][(int)currClick.y].length) counter = 0;
     } else {
       counter = 0;
     }
+    
+    // show current letter and set prevClick
     currentLetter = letters[(int)currClick.x][(int)currClick.y][counter].charAt(0);
     prevClick.set(currClick.x, currClick.y);
   }
